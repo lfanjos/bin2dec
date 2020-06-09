@@ -16,13 +16,18 @@ def index(request):
                 else:
                     bina = [1]
                     ind = -1
-                    for i in range(0, len(numero) - 1):
-                        bina.append(2 ** (i + 1))
-                    for digit in numero:
-                        if digit == '1':
-                            output += bina[ind]
-                        ind -= 1
-                    output = f'Binário: {numero} \t\t Decimal: {output}'
+                    if numero.count('1') + numero.count('0') != len(numero):
+                        messages.error(request, 'Por favor, insira apenas 0 e 1.')
+                        output = ''
+                    else:
+                        messages.success(request, 'Número convertido sem falhas!')
+                        for i in range(0, len(numero) - 1):
+                            bina.append(2 ** (i + 1))
+                        for digit in numero:
+                            if digit == '1':
+                                output += bina[ind]
+                            ind -= 1
+                        output = f'Binário: {numero} \t\t Decimal: {output}'
             elif tipo == 'DECIMAL':
                 numero = int(numero)
                 origin = numero
@@ -42,9 +47,8 @@ def index(request):
                 if len(string) < 4:
                     string = str('0' * (4 - len(string))) + string
                 output = f'Binário: {string} \t\t Decimal: {origin}'
-
+                messages.success(request, 'Número convertido sem falhas!')
             form = NumeroForm()
-            messages.success(request, 'Número convertido sem falhas!')
         else:
             messages.error(request, 'Erro ao converter número!')
     elif str(request.method) == 'GET':

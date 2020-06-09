@@ -13,6 +13,7 @@
     <div class="container">
         <h1>Conversor de numeros binários para decimais</h1>
         <br><br>
+        {% bootstrap_messages %}
         <div class="form-group mx-sm-3 mb-2">
             <form action="{% url 'index' %}" method="post" class="form" autocomplete="off">
             {% csrf_token %}
