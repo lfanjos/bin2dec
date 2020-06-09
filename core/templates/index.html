@@ -1,0 +1,30 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>bin2dec</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <center>
+    <div class="container">
+        <h1>Conversor de numeros binários para decimais</h1>
+        <br><br>
+        <div class="form-group mx-sm-3 mb-2">
+            <form action="{% url 'index' %}" method="post" class="form" autocomplete="off">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button onclick="submit" class="btn btn-primary">Converter</button>
+            {% endbuttons %}
+            </form>
+        </div>
+        {{ output }}
+    </div>
+    </center>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>
